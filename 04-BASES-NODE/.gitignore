@@ -1,0 +1,4 @@
+# Ignore all .txt from output
+/output/*.txt
+# Ignore node_modules
+node_modules/
