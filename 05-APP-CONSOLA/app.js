@@ -1,21 +1,31 @@
 require('colors');
 
+// * Desestructurando en el archivo guardarArchivo es decir importamos las funciones guardarDb, leerDb
+const { guardarDb,
+        leerDb 
+      } = require('./helpers/guardarArchivo');
+
+// * Desestructurando en el archivo inquirer es decir importamos las funciones inquirerMenu, pausa y leerInput 
 const { inquirerMenu, 
         pausa,
         leerInput
-
       } = require('./helpers/inquirer');
 
 const Tareas = require('./models/tareas');
-
-console.clear();
 
 const main = async() => {
 
   let opt = '';
   const tareas = new Tareas();
 
+  const tareasDb = leerDb();
+
+  if ( tareasDb ) {
+    
+  }
+
   do {
+    // * Imprimir el Menú
     opt = await inquirerMenu();
 
     switch ( opt ) {
@@ -26,10 +36,11 @@ const main = async() => {
       break;
 
       case '2':
-        console.log( tareas._listado );
+        console.log( tareas.listadoArr );
       break;
     }
 
+    guardarDb( tareas.listadoArr );
 
     await pausa();
 
@@ -37,5 +48,5 @@ const main = async() => {
 
 }
 
-
+// * Llamando a la funcion main() es a dir la executamos
 main();
